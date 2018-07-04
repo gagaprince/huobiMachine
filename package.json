@@ -1,0 +1,17 @@
+{
+  "name": "huobiMachine",
+  "version": "0.1.0",
+  "description": "huobi jiankong",
+  "author": {},
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "jsonfile": "^4.0.0",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {}
+}

@@ -1,0 +1,28 @@
+# Distribution directory
+dist
+node-modules
+src/npm
+build/static
+.idea
+package-lock.json
+.vscode/
+src/project.config.json
+# Dependency directories
+node_modules
+
+publish
+# Optional npm cache directory
+.npm
+src/npm
+
+# OS temps
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Optional REPL history
+.node_repl_history
+
