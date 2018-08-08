@@ -52,7 +52,6 @@ module.exports={
         if(!Symbol){
             Symbol = jsonfile.readFileSync(jsonPath);
         }
-        console.log(Symbol);
         return Symbol;
     }
 }

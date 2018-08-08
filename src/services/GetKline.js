@@ -41,7 +41,7 @@ module.exports={
                 },
                 json: true
             };
-            console.log(options);
+            // console.log(options);
             return rp(options)
             .then((json) => {
                 if(json.status==='ok'){
@@ -53,7 +53,7 @@ module.exports={
                 }
             })
             .catch((err) => {
-                // console.log(err);
+                console.log(err);
                 return null;
             }).then((res)=>{
                 requestLock++;
@@ -62,7 +62,7 @@ module.exports={
             });
         }else {
             if(requestList.length===0 && requestLock === MAX_REQUEST){
-                console.log('请求队列执行完毕');
+                // console.log('请求队列执行完毕');
                 callbacks.forEach((fun)=>{
                     fun();
                 });
