@@ -9,6 +9,8 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "jsonfile": "^4.0.0",
+    "nodemailer": "^4.6.8",
+    "nodemailer-smtp-transport": "^2.7.4",
     "request": "^2.85.0",
     "request-promise": "^4.2.2"
   },

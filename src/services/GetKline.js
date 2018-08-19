@@ -35,7 +35,7 @@ module.exports={
                     size,
                     symbol:`${ct}${ctb}`
                 },
-                timeout:3000,
+                timeout:10000,
                 headers: {
                     'content-type': 'application/json;charset=utf-8',
                 },

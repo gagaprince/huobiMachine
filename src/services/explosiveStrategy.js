@@ -2,6 +2,7 @@
 // 策略内容  选择1分钟k线 拿到过去20段k线，如果最后一根k线明显比之前k线强 则报警
 const HClass = require('../base/HClass');
 const GetKline = require('./GetKline');
+const MailService = require('./MailService');
 
 const Explosive = HClass.extend({
     coin:null,
@@ -29,12 +30,34 @@ const Explosive = HClass.extend({
         console.log('*******************');
         // data = data.splice(40,20);
         const junDate = this.jun(data.map(item=>item.amount),20);
+        const preJun20 = junDate[1];
+        const curJun20 = junDate[0];
+        const curVal = data[0].amount;
+        const curPrice = data[0].close;
+        const prePrice = data[1].close;
+        const curInc = ((curPrice/prePrice - 1)*100).toFixed(4);
+        const highInc = ((data[0].high/prePrice-1)*100).toFixed(4);
         console.log('当前id:'+data[0].id);
-        console.log('平均量:'+junDate[1]);
-        console.log('当前平均量:'+junDate[0]);
-        console.log('当前量:'+data[0].amount);
-        console.log('当前价:'+data[0].close);
+        console.log('平均量:'+preJun20);
+        console.log('当前平均量:'+curJun20);
+        console.log('当前量:'+curVal);
+        console.log('当前价:'+curPrice);
+        console.log('当前涨跌幅:'+curInc);
+        console.log('当前最高涨幅:'+highInc);
 
+        if(curInc>1 && curVal>3*preJun20){
+            const text =`当前${this.coin}涨幅超过1% 且 有放量 可以关注`
+            console.log(text);
+            const desPrice = curPrice*1.05;
+            const failPrice = curPrice*0.95;
+            MailService.sendMailText(text,`当前价格${curPrice}，目标价格${desPrice}，止损价格${failPrice}~`);
+            return {
+                curPrice,
+                desPrice,
+                failPrice
+            };
+        }
+        return false;
     },
     start(){
         this.stop();
@@ -89,5 +112,8 @@ module.exports={
             let coinStrategy = coinMap[coin+coinb];
             coinStrategy.stop();
         }
+    },
+    test(coin,coinb){
+        return new Explosive(coin,coinb);
     }
 }
