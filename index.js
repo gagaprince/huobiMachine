@@ -12,10 +12,10 @@ const Symbol = updateCoin.getSymbol();
 
 // MailService.sendMailText('测试一下邮箱');
 Symbol['usdt'].forEach((coin,index)=>{
-    /!*setTimeout(()=>{
+    /*setTimeout(()=>{
         console.log(`***********测试${coin}-${coinb}************`);
         testExplosiveStrategy.test(coin,coinb);
-    },5000*index);*!/
+    },5000*index);*/
     setTimeout(()=>{
         explosiveStrategy.beginControl(coin,coinb);
     },1500*index);
