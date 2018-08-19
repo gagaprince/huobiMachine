@@ -7,7 +7,7 @@ const testExplosiveStrategy = require('./src/test/testExplosiveStrategy');
 const Symbol = updateCoin.getSymbol();
 
 // let coin = Symbol['usdt'][0];
-// const coinb = 'usdt';
+const coinb = 'usdt';
 // explosiveStrategy.beginControl(coin,coinb);
 
 // MailService.sendMailText('测试一下邮箱');
