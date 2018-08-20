@@ -3,7 +3,7 @@ const GetKline = require('../services/GetKline');
 module.exports={
     _request(coin,coinb){
         return new Promise((res)=>{
-            GetKline.get1MK(coin,coinb,999,(json)=>{
+                GetKline.get1MK(coin,coinb,2000,(json)=>{
                 res(json.data);
             });
         });
@@ -24,25 +24,25 @@ module.exports={
             const testArray = new Array(length).fill(1);
             const ex = exposiveStrategy.test(coin,coinb);
             testArray.forEach((item,index)=>{
-                if(index<=length-22){
+                if(index<=length-32){
                     if(flag==='find'){
-                        const iArray = data.slice(-22-index,index!==0?-index:undefined);
+                        const iArray = data.slice(-32-index,index!==0?-index:undefined);
                         findObj = ex._anysis(iArray);
                         if(findObj){
-                            this.consoleTime(length-22-index);
+                            this.consoleTime(length-32-index);
                             console.log('找到一商机');
                             sumFind ++;
                             flag = 'fined';
                         }
                     }else{
-                        const current = data.slice(-22-index,-21-index)[0];
+                        const current = data.slice(-32-index,-21-index)[0];
                         if(current.high>=findObj.desPrice){
-                            this.consoleTime(length-22-index);
+                            this.consoleTime(length-32-index);
                             console.log('止盈卖出');
                             successFind++;
                             flag='find';
                         }else if(current.low<=current.failPrice){
-                            this.consoleTime(length-22-index);
+                            this.consoleTime(length-32-index);
                             console.log('止损卖出');
                             failFind++;
                             flag='find';

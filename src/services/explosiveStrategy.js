@@ -21,7 +21,7 @@ const Explosive = HClass.extend({
     },
     _request(){
         return new Promise((res)=>{
-            GetKline.get1MK(this.coin,this.coinb,22,(json)=>{
+            GetKline.get1MK(this.coin,this.coinb,32,(json)=>{
                 res(json.data);
             });
         });
@@ -29,6 +29,7 @@ const Explosive = HClass.extend({
     _anysis(data){
         console.log('*******************');
         // data = data.splice(40,20);
+        const max = this.max(data.map(item=>item.amount),25);
         const junDate = this.jun(data.map(item=>item.amount),20);
         const preJun20 = junDate[1];
         const curJun20 = junDate[0];
@@ -38,6 +39,7 @@ const Explosive = HClass.extend({
         const curInc = ((curPrice/prePrice - 1)*100).toFixed(4);
         const highInc = ((data[0].high/prePrice-1)*100).toFixed(4);
         console.log('当前id:'+data[0].id);
+        console.log('最大量极值:'+max);
         console.log('平均量:'+preJun20);
         console.log('当前平均量:'+curJun20);
         console.log('当前量:'+curVal);
@@ -45,8 +47,8 @@ const Explosive = HClass.extend({
         console.log('当前涨跌幅:'+curInc);
         console.log('当前最高涨幅:'+highInc);
 
-        if(curInc>1 && curVal>3*preJun20){
-            const text =`当前${this.coin}涨幅超过1% 且 有放量 可以关注`
+        if(curInc>1.5 && curVal>2*max){
+            const text =`当前${this.coin}涨幅超过1.5% 且 有放量 可以关注`
             console.log(text);
             const desPrice = curPrice*1.05;
             const failPrice = curPrice*0.95;
@@ -90,6 +92,20 @@ const Explosive = HClass.extend({
                 ret.push(jun.toFixed(2));
             }
             return ret;
+        }
+        return 0;
+    },
+    max(data,num){
+        if(data && data.length>num){
+            let max = 0;
+            data.forEach((item,index)=>{
+                if(index===0)return;
+                if(index<=num){
+                    max = item>max?item:max;
+                }
+                return index>num;
+            });
+            return max;
         }
         return 0;
     }

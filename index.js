@@ -6,9 +6,11 @@ const testExplosiveStrategy = require('./src/test/testExplosiveStrategy');
 
 const Symbol = updateCoin.getSymbol();
 
-// let coin = Symbol['usdt'][0];
+ // let coin = 'soc';//Symbol['usdt'][0];
 const coinb = 'usdt';
 // explosiveStrategy.beginControl(coin,coinb);
+
+// testExplosiveStrategy.test(coin,coinb);
 
 // MailService.sendMailText('测试一下邮箱');
 Symbol['usdt'].forEach((coin,index)=>{
