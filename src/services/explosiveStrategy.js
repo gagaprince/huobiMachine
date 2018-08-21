@@ -28,7 +28,7 @@ const Explosive = HClass.extend({
         });
     },
     _anysis(data){
-        console.log('*******************');
+        // console.log('*******************');
         // data = data.splice(40,20);
         const max = this.max(data.map(item=>item.amount),25);
         const junDate = this.jun(data.map(item=>item.amount),20);
