@@ -3,6 +3,7 @@
 const HClass = require('../base/HClass');
 const GetKline = require('./GetKline');
 const MailService = require('./MailService');
+const commonUtil = require('../util/commonUtil');
 
 const Explosive = HClass.extend({
     coin:null,
@@ -38,17 +39,19 @@ const Explosive = HClass.extend({
         const prePrice = data[1].close;
         const curInc = ((curPrice/prePrice - 1)*100).toFixed(4);
         const highInc = ((data[0].high/prePrice-1)*100).toFixed(4);
-        console.log('当前id:'+data[0].id);
-        console.log('最大量极值:'+max);
-        console.log('平均量:'+preJun20);
-        console.log('当前平均量:'+curJun20);
-        console.log('当前量:'+curVal);
-        console.log('当前价:'+curPrice);
-        console.log('当前涨跌幅:'+curInc);
-        console.log('当前最高涨幅:'+highInc);
+        // console.log('当前id:'+data[0].id);
+        // console.log('最大量极值:'+max);
+        // console.log('平均量:'+preJun20);
+        // console.log('当前平均量:'+curJun20);
+        // console.log('当前量:'+curVal);
+        // console.log('当前价:'+curPrice);
+        // console.log('当前涨跌幅:'+curInc);
+        // console.log('当前最高涨幅:'+highInc);
 
         if(curInc>1.5 && curVal>2*max){
-            const text =`当前${this.coin}涨幅超过1.5% 且 有放量 可以关注`
+            console.log('*******************');
+            const text =`当前${this.coin}涨幅超过1.5% 且 有放量 可以关注`;
+            console.log(`当前时间${commonUtil.formatDate(new Date(),'yyyy-MM-dd hh:mm:ss')}`)
             console.log(text);
             const desPrice = curPrice*1.05;
             const failPrice = curPrice*0.95;
