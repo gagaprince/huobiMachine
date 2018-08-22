@@ -55,7 +55,7 @@ const Explosive = HClass.extend({
             console.log(text);
             const desPrice = curPrice*1.05;
             const failPrice = curPrice*0.95;
-            MailService.sendMailText(text,`当前价格${curPrice}，目标价格${desPrice}，止损价格${failPrice}~`);
+            //MailService.sendMailText(text,`当前价格${curPrice}，目标价格${desPrice}，止损价格${failPrice}~`);
             return {
                 curPrice,
                 desPrice,

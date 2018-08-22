@@ -2,6 +2,7 @@ const updateCoin = require('./src/util/updateCoin');
 const explosiveStrategy = require('./src/services/explosiveStrategy');
 const MailService = require('./src/services/MailService');
 const testExplosiveStrategy = require('./src/test/testExplosiveStrategy');
+const commonUtil = require('./src/util/commonUtil');
 // updateCoin.updateSymbol();
 
 const Symbol = updateCoin.getSymbol();
@@ -21,7 +22,9 @@ Symbol['usdt'].forEach((coin,index)=>{
     setTimeout(()=>{
         explosiveStrategy.beginControl(coin,coinb);
     },1500*index);
-
 });
 
+setInterval(()=>{
+    console.log(`心跳：${commonUtil.formatDate(new Date(),'yyyy-MM-dd hh:mm:ss')}########`)
+},10000);
 
