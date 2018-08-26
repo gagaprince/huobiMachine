@@ -3,6 +3,7 @@
 const HClass = require('../base/HClass');
 const GetKline = require('./GetKline');
 const MailService = require('./MailService');
+const PushService = require('./PushService');
 const commonUtil = require('../util/commonUtil');
 
 const Explosive = HClass.extend({
@@ -56,6 +57,7 @@ const Explosive = HClass.extend({
             const desPrice = curPrice*1.05;
             const failPrice = curPrice*0.95;
             MailService.sendMailText(text,`当前价格${curPrice}，目标价格${desPrice}，止损价格${failPrice}~`);
+            PushService.pushText(text,`当前价格${curPrice}，目标价格${desPrice}，止损价格${failPrice}~`);
             return {
                 curPrice,
                 desPrice,
